@@ -6,12 +6,13 @@
 
 **A modern, full-stack task management application**
 
-[![CI](https://github.com/yourusername/taskflow/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/taskflow/actions/workflows/ci.yml)
+[![CI](https://github.com/denislav86/taskflow-fullstack/actions/workflows/ci.yml/badge.svg)](https://github.com/denislav86/taskflow-fullstack/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![React 18](https://img.shields.io/badge/react-18-61dafb.svg)](https://reactjs.org/)
+[![pnpm](https://img.shields.io/badge/pnpm-8-f69220.svg)](https://pnpm.io/)
 
-[Features](#features) • [Tech Stack](#tech-stack) • [Quick Start](#quick-start) • [API Documentation](#api-documentation) • [Screenshots](#screenshots)
+[Features](#features) • [Quick Start](#quick-start) • [Architecture](#architecture) • [Development](#development) • [API Docs](#api-documentation)
 
 </div>
 
@@ -19,155 +20,63 @@
 
 ## Overview
 
-TaskFlow is a portfolio-ready, full-stack task management application built with FastAPI and React. It demonstrates modern web development practices including JWT authentication, RESTful API design, responsive UI, and containerized deployment.
+TaskFlow is a **portfolio-ready, full-stack task management application** built with FastAPI and React. It demonstrates modern web development practices including JWT authentication, RESTful API design, responsive UI, and containerized deployment.
 
-Perfect for:
-- 📚 Learning full-stack development
-- 💼 Portfolio projects
-- 🚀 SaaS starter template
-- 🏢 Internal team tools
+### Perfect for:
+- 📚 **Learning** - Full-stack development patterns
+- 💼 **Portfolio** - Showcase your skills
+- 🚀 **SaaS Starter** - Foundation for your next project
+- 🏢 **Internal Tools** - Team task management
 
 ## Features
 
-- ✅ **Complete CRUD Operations** - Create, read, update, and delete tasks
-- 🔐 **JWT Authentication** - Secure login with access & refresh tokens
-- 🔍 **Advanced Filtering** - Filter by status, priority, and search text
-- 📊 **Analytics Dashboard** - Track productivity with charts and metrics
-- 🌓 **Dark/Light Mode** - Beautiful UI with theme switching
-- 📱 **Responsive Design** - Works on desktop and mobile
-- 🐳 **Docker Ready** - One command to run everything
-- ✅ **Test Coverage** - Comprehensive backend tests
+| Feature | Description |
+|---------|-------------|
+| ✅ **CRUD Operations** | Create, read, update, and delete tasks |
+| 🔐 **JWT Authentication** | Secure login with access & refresh tokens |
+| 🔍 **Advanced Filtering** | Filter by status, priority, search text |
+| 📊 **Analytics Dashboard** | Track productivity with charts |
+| 🌓 **Dark/Light Mode** | Beautiful theme switching |
+| 📱 **Responsive Design** | Works on all devices |
+| 🐳 **Docker Ready** | One command setup |
+| ✅ **Test Coverage** | Comprehensive pytest tests |
+| 🚀 **CI/CD** | GitHub Actions pipeline |
 
-## Tech Stack
-
-### Backend
-- **FastAPI** - Modern Python web framework
-- **PostgreSQL** - Relational database
-- **SQLAlchemy** - ORM with type hints
-- **Alembic** - Database migrations
-- **Pydantic** - Data validation
-- **JWT** - Authentication tokens
-- **pytest** - Testing framework
-
-### Frontend
-- **React 18** - UI library
-- **TypeScript** - Type safety
-- **React Query** - Data fetching
-- **Zustand** - State management
-- **React Router** - Client-side routing
-- **Tailwind CSS** - Styling
-- **Recharts** - Charts
-
-### DevOps
-- **Docker** - Containerization
-- **Docker Compose** - Multi-container orchestration
-- **GitHub Actions** - CI/CD pipeline
-
-## Architecture
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                         Client Browser                          │
-└─────────────────────────────┬───────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    React Frontend (Port 3000)                   │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────────────┐│
-│  │  Pages   │  │Components│  │  Hooks   │  │ Services (API)   ││
-│  └──────────┘  └──────────┘  └──────────┘  └──────────────────┘│
-└─────────────────────────────┬───────────────────────────────────┘
-                              │ HTTP/REST
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                   FastAPI Backend (Port 8000)                   │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────────────┐│
-│  │ Routers  │──│ Services │──│  Models  │──│    Schemas       ││
-│  └──────────┘  └──────────┘  └──────────┘  └──────────────────┘│
-└─────────────────────────────┬───────────────────────────────────┘
-                              │ SQLAlchemy
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                   PostgreSQL (Port 5432)                        │
-│  ┌──────────────────────┐  ┌───────────────────────────────────┐│
-│  │       users          │  │              tasks                ││
-│  └──────────────────────┘  └───────────────────────────────────┘│
-└─────────────────────────────────────────────────────────────────┘
-```
-
-## Project Structure
-
-```
-taskflow-fullstack/
-├── backend/
-│   ├── app/
-│   │   ├── api/
-│   │   │   ├── deps.py          # Dependency injection
-│   │   │   └── routers/         # API endpoints
-│   │   ├── core/
-│   │   │   ├── config.py        # Settings
-│   │   │   ├── database.py      # Database setup
-│   │   │   ├── exceptions.py    # Custom exceptions
-│   │   │   └── security.py      # JWT & password hashing
-│   │   ├── models/              # SQLAlchemy models
-│   │   ├── schemas/             # Pydantic schemas
-│   │   ├── services/            # Business logic
-│   │   └── main.py              # FastAPI app
-│   ├── alembic/                 # Database migrations
-│   ├── tests/                   # pytest tests
-│   ├── scripts/
-│   │   └── seed.py              # Demo data seeding
-│   ├── Dockerfile
-│   └── requirements.txt
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── layout/          # Header, Layout, etc.
-│   │   │   ├── tasks/           # Task-related components
-│   │   │   └── ui/              # Reusable UI components
-│   │   ├── hooks/               # React Query hooks
-│   │   ├── pages/               # Route pages
-│   │   ├── services/            # API service functions
-│   │   ├── store/               # Zustand stores
-│   │   ├── types/               # TypeScript types
-│   │   ├── App.tsx
-│   │   └── main.tsx
-│   ├── Dockerfile
-│   └── package.json
-├── .github/workflows/ci.yml     # CI pipeline
-├── docker-compose.yml
-├── Makefile
-└── README.md
-```
+---
 
 ## Quick Start
 
 ### Prerequisites
 
-- [Docker](https://www.docker.com/get-started) & Docker Compose
+- [Docker](https://www.docker.com/get-started) & Docker Compose v2+
 - [Git](https://git-scm.com/)
+- Make (optional, for convenience commands)
 
-### Setup
+### One-Command Setup
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/taskflow.git
-   cd taskflow
-   ```
+```bash
+# Clone the repository
+git clone https://github.com/denislav86/taskflow-fullstack.git
+cd taskflow-fullstack
 
-2. **Start the application**
-   ```bash
-   make setup
-   ```
-   This will:
-   - Build all Docker containers
-   - Run database migrations
-   - Seed demo data
+# Start everything (builds, migrates, seeds)
+make setup
+```
 
-3. **Access the application**
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:8000
-   - API Docs: http://localhost:8000/docs
+This will:
+1. Build all Docker containers
+2. Start PostgreSQL, Backend, and Frontend
+3. Run database migrations
+4. Seed demo data
+
+### Access the Application
+
+| Service | URL |
+|---------|-----|
+| 🌐 Frontend | http://localhost:3000 |
+| ⚡ Backend API | http://localhost:8000 |
+| 📚 API Docs | http://localhost:8000/docs |
+| 📖 ReDoc | http://localhost:8000/redoc |
 
 ### Demo Credentials
 
@@ -176,30 +85,256 @@ Email:    demo@taskflow.dev
 Password: demo1234
 ```
 
-## Available Commands
+---
+
+## Architecture
+
+### System Overview
+
+```mermaid
+graph TB
+    subgraph Client
+        Browser[Web Browser]
+    end
+    
+    subgraph Docker["Docker Compose"]
+        subgraph Frontend["Frontend Container :3000"]
+            React[React + Vite]
+        end
+        
+        subgraph Backend["Backend Container :8000"]
+            FastAPI[FastAPI]
+            Alembic[Alembic Migrations]
+        end
+        
+        subgraph Database["Database Container :5432"]
+            PostgreSQL[(PostgreSQL)]
+        end
+    end
+    
+    Browser --> React
+    React -->|HTTP/REST| FastAPI
+    FastAPI -->|SQLAlchemy| PostgreSQL
+    Alembic -->|Migrations| PostgreSQL
+```
+
+### Request Flow
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant F as Frontend
+    participant B as Backend
+    participant D as Database
+    
+    C->>F: User Action
+    F->>B: API Request + JWT
+    B->>B: Validate Token
+    B->>D: Query/Mutation
+    D-->>B: Result
+    B-->>F: JSON Response
+    F-->>C: Updated UI
+```
+
+### Tech Stack
+
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| **Frontend** | React 18, TypeScript, Vite | UI Framework |
+| | TanStack Query | Server State |
+| | Zustand | Client State |
+| | Tailwind CSS | Styling |
+| | React Router | Routing |
+| **Backend** | FastAPI | API Framework |
+| | SQLAlchemy 2.0 | ORM |
+| | Pydantic v2 | Validation |
+| | Alembic | Migrations |
+| | python-jose | JWT Auth |
+| **Database** | PostgreSQL 15 | Data Storage |
+| **DevOps** | Docker, pnpm | Containerization |
+| | GitHub Actions | CI/CD |
+
+---
+
+## Project Structure
+
+```
+taskflow-fullstack/
+├── backend/
+│   ├── app/
+│   │   ├── api/
+│   │   │   ├── deps.py              # Dependency injection
+│   │   │   └── routers/             # API endpoints
+│   │   │       ├── auth.py
+│   │   │       ├── tasks.py
+│   │   │       └── analytics.py
+│   │   ├── core/
+│   │   │   ├── config.py            # Settings
+│   │   │   ├── database.py          # DB connection
+│   │   │   ├── exceptions.py        # Custom exceptions
+│   │   │   └── security.py          # JWT & hashing
+│   │   ├── models/                  # SQLAlchemy models
+│   │   ├── schemas/                 # Pydantic schemas
+│   │   ├── services/                # Business logic
+│   │   └── main.py                  # FastAPI app
+│   ├── alembic/                     # DB migrations
+│   ├── tests/                       # pytest tests
+│   ├── scripts/seed.py              # Demo data
+│   ├── Dockerfile                   # Dev image
+│   ├── Dockerfile.prod              # Production image
+│   └── requirements.txt
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── layout/              # Header, Layout
+│   │   │   ├── tasks/               # Task components
+│   │   │   └── ui/                  # Reusable UI
+│   │   ├── hooks/                   # React Query hooks
+│   │   ├── pages/                   # Route pages
+│   │   ├── services/                # API functions
+│   │   ├── store/                   # Zustand stores
+│   │   ├── types/                   # TypeScript types
+│   │   └── App.tsx
+│   ├── Dockerfile                   # Dev image
+│   ├── Dockerfile.prod              # Production image
+│   └── package.json
+│
+├── .github/workflows/ci.yml         # CI/CD pipeline
+├── docker-compose.yml               # Development
+├── docker-compose.prod.yml          # Production
+├── Makefile                         # Dev commands
+└── README.md
+```
+
+---
+
+## Development
+
+### Available Commands
 
 ```bash
-make help           # Show all available commands
+make help                 # Show all commands
 
-# Docker
-make up             # Start all services
-make down           # Stop all services
-make build          # Rebuild containers
-make logs           # View logs
+# 🐳 Docker Commands
+make up                   # Start services (foreground)
+make up-d                 # Start services (background)
+make down                 # Stop services
+make build                # Rebuild containers
+make logs                 # View all logs
+make logs-backend         # View backend logs
+make logs-frontend        # View frontend logs
 
-# Development
-make backend-shell  # Shell into backend container
-make frontend-shell # Shell into frontend container
-make db-shell       # PostgreSQL shell
+# 💻 Development
+make backend-shell        # Shell into backend
+make frontend-shell       # Shell into frontend
+make db-shell             # PostgreSQL shell
+make lint                 # Run all linters
+make typecheck            # TypeScript check
 
-# Database
-make migrate        # Run migrations
-make seed           # Seed demo data
+# 🗄️ Database
+make migrate              # Run migrations
+make migrate-create name="description"
+make seed                 # Seed demo data
+make db-reset             # Reset database
 
-# Testing
-make test           # Run backend tests
-make lint           # Run linters
+# 🧪 Testing
+make test                 # Run backend tests
+make test-cov             # Tests with coverage
 ```
+
+### Docker Development Strategy
+
+This project uses an optimized Docker setup for local development:
+
+#### Backend Caching Strategy
+- **Layer 1**: System dependencies (rarely changes)
+- **Layer 2**: Python dependencies via `requirements.txt`
+- **Layer 3**: Application code (hot-reloaded)
+
+```dockerfile
+# requirements.txt is copied first
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# Source code mounted via docker-compose volumes
+```
+
+#### Frontend Caching Strategy
+- Uses **pnpm** for fast, efficient dependency management
+- Smart entrypoint script detects dependency changes
+- Only reinstalls when `package.json` or `pnpm-lock.yaml` change
+
+```dockerfile
+# Dependencies installed in image
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+
+# Entrypoint checks for changes at runtime
+ENTRYPOINT ["/docker-entrypoint.sh"]
+```
+
+### Running Without Docker
+
+#### Backend
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+
+# Set environment variables
+export DATABASE_URL=postgresql://user:pass@localhost:5432/taskflow
+export SECRET_KEY=your-secret-key
+
+# Run migrations
+alembic upgrade head
+
+# Start server
+uvicorn app.main:app --reload
+```
+
+#### Frontend
+```bash
+cd frontend
+corepack enable
+pnpm install
+
+# Start dev server
+pnpm dev
+```
+
+---
+
+## CI/CD Pipeline
+
+The GitHub Actions workflow runs on every push and PR:
+
+```mermaid
+graph LR
+    subgraph Backend
+        BT[Tests] --> BL[Lint]
+        BL --> BD[Docker Build]
+    end
+    
+    subgraph Frontend
+        FL[Lint] --> FT[TypeScript]
+        FT --> FB[Build]
+        FL --> FD[Docker Build]
+    end
+```
+
+### Pipeline Jobs
+
+| Job | Description | Triggers |
+|-----|-------------|----------|
+| `backend-test` | pytest + flake8 | All pushes |
+| `backend-build` | Docker image build | After tests pass |
+| `frontend-lint` | ESLint + TypeScript | All pushes |
+| `frontend-build` | Vite production build | After lint passes |
+| `frontend-docker` | Docker image build | After lint passes |
+
+---
 
 ## API Documentation
 
@@ -217,17 +352,6 @@ Content-Type: application/json
 }
 ```
 
-Response:
-```json
-{
-  "id": 1,
-  "email": "user@example.com",
-  "full_name": "John Doe",
-  "is_active": true,
-  "created_at": "2024-01-15T10:30:00Z"
-}
-```
-
 #### Login
 ```http
 POST /auth/login
@@ -239,7 +363,7 @@ Content-Type: application/json
 }
 ```
 
-Response:
+**Response:**
 ```json
 {
   "access_token": "eyJhbGciOiJIUzI1NiIs...",
@@ -254,29 +378,6 @@ Response:
 ```http
 GET /tasks?status=todo&priority=high&search=meeting&page=1&page_size=10
 Authorization: Bearer <access_token>
-```
-
-Response:
-```json
-{
-  "items": [
-    {
-      "id": 1,
-      "title": "Team meeting",
-      "description": "Weekly sync",
-      "status": "todo",
-      "priority": "high",
-      "due_date": "2024-01-20T14:00:00Z",
-      "created_at": "2024-01-15T10:30:00Z",
-      "updated_at": "2024-01-15T10:30:00Z",
-      "owner_id": 1
-    }
-  ],
-  "total": 1,
-  "page": 1,
-  "page_size": 10,
-  "total_pages": 1
-}
 ```
 
 #### Create Task
@@ -296,13 +397,12 @@ Content-Type: application/json
 
 ### Analytics
 
-#### Get Summary
 ```http
 GET /analytics/summary
 Authorization: Bearer <access_token>
 ```
 
-Response:
+**Response:**
 ```json
 {
   "total_tasks": 12,
@@ -316,85 +416,72 @@ Response:
 }
 ```
 
-## Screenshots
-
-### Dashboard
-![Dashboard](https://via.placeholder.com/800x500/1f2937/ffffff?text=Dashboard+Screenshot)
-
-### Analytics
-![Analytics](https://via.placeholder.com/800x500/1f2937/ffffff?text=Analytics+Screenshot)
-
-### Dark Mode
-![Dark Mode](https://via.placeholder.com/800x500/111827/ffffff?text=Dark+Mode+Screenshot)
-
-## Development
-
-### Running Without Docker
-
-#### Backend
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-
-# Set environment variables
-export DATABASE_URL=postgresql://user:pass@localhost:5432/taskflow
-export SECRET_KEY=your-secret-key
-
-# Run migrations
-alembic upgrade head
-
-# Start server
-uvicorn app.main:app --reload
-```
-
-#### Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-### Running Tests
-```bash
-# Backend tests
-cd backend
-pytest -v
-
-# Frontend lint
-cd frontend
-npm run lint
-```
+---
 
 ## Environment Variables
 
 ### Backend
+
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `DATABASE_URL` | PostgreSQL connection string | `postgresql://taskflow:taskflow@db:5432/taskflow` |
-| `SECRET_KEY` | JWT signing key | `your-super-secret-key` |
-| `ACCESS_TOKEN_EXPIRE_MINUTES` | Access token lifetime | `30` |
+| `DATABASE_URL` | PostgreSQL connection | `postgresql://taskflow:taskflow@db:5432/taskflow` |
+| `SECRET_KEY` | JWT signing key | Required in production |
+| `ACCESS_TOKEN_EXPIRE_MINUTES` | Token lifetime | `30` |
 | `REFRESH_TOKEN_EXPIRE_DAYS` | Refresh token lifetime | `7` |
-| `CORS_ORIGINS` | Allowed CORS origins | `["http://localhost:3000"]` |
+| `CORS_ORIGINS` | Allowed origins | `["http://localhost:3000"]` |
+| `DEBUG` | Debug mode | `false` |
 
 ### Frontend
+
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `VITE_API_URL` | Backend API URL | `http://localhost:8000` |
 
+---
+
+## Production Deployment
+
+### Using Production Docker Compose
+
+```bash
+# Create .env file with production values
+cp .env.example .env.prod
+# Edit .env.prod with your values
+
+# Build and start
+docker compose -f docker-compose.prod.yml up -d --build
+```
+
+### Production Checklist
+
+- [ ] Set strong `SECRET_KEY`
+- [ ] Set strong `POSTGRES_PASSWORD`
+- [ ] Configure `CORS_ORIGINS` for your domain
+- [ ] Set up HTTPS (nginx/traefik)
+- [ ] Configure proper logging
+- [ ] Set up monitoring
+
+---
+
 ## Future Improvements
 
+### Planned Features
 - [ ] Email verification
 - [ ] Password reset flow
 - [ ] Task categories/labels
-- [ ] Task comments
-- [ ] File attachments
+- [ ] Task comments & attachments
 - [ ] Team collaboration
-- [ ] Notifications
+- [ ] Real-time notifications (WebSocket)
 - [ ] Calendar view
 - [ ] Mobile app (React Native)
+
+### Infrastructure
 - [ ] Kubernetes deployment
+- [ ] Redis caching
+- [ ] Background jobs (Celery)
+- [ ] S3 file storage
+
+---
 
 ## Contributing
 
@@ -404,9 +491,19 @@ npm run lint
 4. Push to branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
+### Development Guidelines
+- Follow existing code style
+- Add tests for new features
+- Update documentation
+- Keep PRs focused and small
+
+---
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
 
 ## Acknowledgments
 
@@ -414,10 +511,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [React](https://reactjs.org/) - JavaScript UI library
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
 - [Lucide Icons](https://lucide.dev/) - Beautiful icons
+- [pnpm](https://pnpm.io/) - Fast, disk space efficient package manager
 
 ---
 
 <div align="center">
-  Made with ❤️ for the developer community
-</div>
 
+**Built with ❤️ for the developer community**
+
+[⬆ Back to Top](#taskflow)
+
+</div>
