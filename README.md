@@ -285,7 +285,7 @@ pip install -r requirements.txt
 
 # Set environment variables
 export DATABASE_URL=postgresql://user:pass@localhost:5432/taskflow
-export SECRET_KEY=your-secret-key
+export SECRET_KEY=secret-key
 
 # Run migrations
 alembic upgrade head

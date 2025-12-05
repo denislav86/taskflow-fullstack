@@ -1,5 +1,5 @@
-import { Search, Filter, X } from 'lucide-react';
-import { Input, Select, Button } from '@/components/ui';
+import { Search, X } from 'lucide-react';
+import { Select, Button } from '@/components/ui';
 import type { TaskFilters as TaskFiltersType } from '@/types';
 
 interface TaskFiltersProps {

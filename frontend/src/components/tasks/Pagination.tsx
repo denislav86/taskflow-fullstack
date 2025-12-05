@@ -45,7 +45,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
       </button>
 
       {/* Page Numbers */}
-      {pagesWithEllipsis.map((page, index) => {
+      {pagesWithEllipsis.map((page, _index) => {
         if (typeof page === 'string') {
           return (
             <span
