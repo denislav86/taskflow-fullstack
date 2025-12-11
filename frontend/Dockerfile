@@ -10,7 +10,7 @@
 FROM node:20-alpine
 
 # Install pnpm globally
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable && corepack prepare pnpm@8 --activate
 
 WORKDIR /app
 
